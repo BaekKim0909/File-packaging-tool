@@ -255,6 +255,8 @@
                         <Button Content="复制路径" Width="100px" Height="30px" Style="{StaticResource ButtonSuccess}" Command="{Binding SelectCopyPathCommand}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="切换为EN:" FontSize="20" VerticalAlignment="Center"/>
+                        <ToggleButton Style="{StaticResource ToggleButtonSwitch}" IsChecked="{Binding IsEnglish, Mode=TwoWay}" Command="{Binding SwitchUserManualCommand}"/>
                         <Button Width="100px" Height="40px" Style="{StaticResource ButtonPrimary}" Content="打包并复制" Margin="10,0,0,0" Command="{Binding PackageCommand}" />
                     </StackPanel>
                 </StackPanel>

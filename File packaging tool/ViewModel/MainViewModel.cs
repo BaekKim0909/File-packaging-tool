@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -45,7 +46,8 @@ namespace File_packaging_tool.ViewModel
         private string packagePath;
         //复制的地址
         private string copyPath;
-
+        //中英文切换
+        private bool isEnglish;
         public string PackagePath
         {
             get
@@ -82,6 +84,31 @@ namespace File_packaging_tool.ViewModel
                 RaisePropertyChanged(() => PackageName);
             }
         }
+        public bool IsEnglish
+        {
+            get
+            {
+                return isEnglish;
+            }
+            set
+            {
+                isEnglish = value;
+                RaisePropertyChanged(() => IsEnglish);
+            }
+        }       
+        //已选文件
+        public ObservableCollection<string> SelectedFiles
+        {
+            get { return _selectedFiles; }
+            set
+            {
+                if (_selectedFiles != value)
+                {
+                    _selectedFiles = value;
+                    RaisePropertyChanged(nameof(SelectedFiles));
+                }
+            }
+        }
         public ObservableCollection<FileModel> MCF { get; set; } = new ObservableCollection<FileModel>();
         public ObservableCollection<FileModel> CorrectionWizard { get; set; } = new ObservableCollection<FileModel>();
         public ObservableCollection<FileModel> RayMarking { get; set; } = new ObservableCollection<FileModel>();
@@ -105,19 +132,8 @@ namespace File_packaging_tool.ViewModel
         public RelayCommand ClearCopyPathCommand { get; }
         public RelayCommand ClearPackagePathCommand { get; }
         public RelayCommand<FileModel> RemoveFileCommand { get; }
-        //已选文件
-        public ObservableCollection<string> SelectedFiles
-        {
-            get { return _selectedFiles; }
-            set
-            {
-                if (_selectedFiles != value)
-                {
-                    _selectedFiles = value;
-                    RaisePropertyChanged(nameof(SelectedFiles));
-                }
-            }
-        }
+        public RelayCommand SwitchUserManualCommand { get; }
+
         //展示文件名
         public ObservableCollection<string> ShowFiles
         {
@@ -133,6 +149,34 @@ namespace File_packaging_tool.ViewModel
         }
         public MainViewModel()
         {
+            IsEnglish = false;
+            Init();
+            ToggleCheckBoxCommand = new RelayCommand<FileModel>(ToggleCheckBox);
+            PackageCommand = new RelayCommand(Package);
+            SelectPackagePathCommand = new RelayCommand(SelectPackagePath);
+            SelectCopyPathCommand = new RelayCommand(SelectCopyPath);
+            ClearCopyPathCommand = new RelayCommand(ClearCopyPath);
+            ClearPackagePathCommand = new RelayCommand(ClearPackagePath);
+            RemoveFileCommand = new RelayCommand<FileModel>(RemoveFile);
+            SwitchUserManualCommand = new RelayCommand(SwitchUserManual);
+            PackagePath = string.Empty;
+            CopyPath = string.Empty;
+        }
+
+        // RemoveFileCommand Button.Command  ICommand 在类型为 MainWindow 的对象上找不到 RemoveFileCommand 属性。			
+        //初始化方法
+        public void Init()
+        {
+            CorrectionWizard.Clear();
+            MCF.Clear();
+            RayMarking.Clear();
+            RayMaster.Clear();
+            LWS.Clear();
+            NPRF.Clear();
+            RM5D.Clear();
+            RMC2.Clear();
+            EssencialFiles.Clear();
+            AdditionalFiles.Clear();
             LoadItems(@"Z:\RMC2软件包\拷贝文件分组测试\CorrectionWizard", CorrectionWizard);
             LoadItems(@"Z:\RMC2软件包\拷贝文件分组测试\MCF", MCF);
             LoadItems(@"Z:\RMC2软件包\拷贝文件分组测试\RayMarking", RayMarking);
@@ -143,22 +187,7 @@ namespace File_packaging_tool.ViewModel
             LoadItems(@"Z:\RMC2软件包\拷贝文件分组测试\RMC2", RMC2);
             LoadItems(@"Z:\RMC2软件包\拷贝文件分组测试\必备文件程序包", EssencialFiles);
             LoadItems(@"Z:\RMC2软件包\拷贝文件分组测试\附加文件夹", AdditionalFiles);
-
-
-            ToggleCheckBoxCommand = new RelayCommand<FileModel>(ToggleCheckBox);
-            PackageCommand = new RelayCommand(Package);
-            SelectPackagePathCommand = new RelayCommand(SelectPackagePath);
-            SelectCopyPathCommand = new RelayCommand(SelectCopyPath);
-            ClearCopyPathCommand = new RelayCommand(ClearCopyPath);
-            ClearPackagePathCommand = new RelayCommand(ClearPackagePath);
-            RemoveFileCommand = new RelayCommand<FileModel>(RemoveFile);
-            
-            PackagePath = string.Empty;
-            CopyPath = string.Empty;
         }
-
-        // RemoveFileCommand Button.Command  ICommand 在类型为 MainWindow 的对象上找不到 RemoveFileCommand 属性。			
-
         //读取文件夹操作
         public void LoadItems(string path, ObservableCollection<FileModel> collection)
         {
@@ -174,6 +203,23 @@ namespace File_packaging_tool.ViewModel
                     IsSelect = false
                 };
                 collection.Add(item);
+                if (IsPDF(item.FilePath))
+                {
+                    if (IsEnglish)
+                    {
+                        if (!item.FilePath.Contains("(EN)"))
+                        {
+                            collection.Remove(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item.FilePath.Contains("(EN)"))
+                        {
+                            collection.Remove(item);
+                        }
+                    }
+                }
             }
 
             foreach (string directoryPath in Directory.GetDirectories(path))
@@ -199,11 +245,13 @@ namespace File_packaging_tool.ViewModel
             {
                 SelectedFilesArray.Remove(file);
                 SelectedFiles.Remove(file.FilePath);
+                file.IsSelect = false;
             }
             else
             {
                 SelectedFilesArray.Add(file);
                 SelectedFiles.Add(file.FilePath);
+                file.IsSelect = true;
             }
         }
         //
@@ -227,6 +275,11 @@ namespace File_packaging_tool.ViewModel
             {
                 System.Windows.MessageBox.Show("请输入包名");
                 return;
+            }
+            SelectedFiles.Clear();
+            foreach(var file in SelectedFilesArray)
+            {
+                SelectedFiles.Add(file.FilePath.ToString());
             }
             // 创建一个新的压缩包（打包到指定位置）
             if (!string.IsNullOrEmpty(PackagePath))
@@ -391,6 +444,40 @@ namespace File_packaging_tool.ViewModel
                 string subDirectoryName = new DirectoryInfo(subDirectoryPath).Name;
                 string entryPath = Path.Combine(entryName, subDirectoryName, ""); // 将子文件夹添加进压缩包，后面的空字符串表示子文件夹路径
                 AddDirectoryToZip(archive, subDirectoryPath, entryPath);
+            }
+        }
+        public bool IsPDF(string filePath)
+        {
+            string extension = Path.GetExtension(filePath);
+            return string.Equals(extension, ".pdf", StringComparison.OrdinalIgnoreCase);
+        }
+        public void SwitchUserManual()
+        {
+            Init();
+            for (int i = 0; i < SelectedFilesArray.Count; i++)
+            {
+                var file = SelectedFilesArray[i];
+                if (IsPDF(file.FilePath))
+                {
+                    if (IsEnglish)
+                    {
+                        if (!file.FilePath.Contains("(EN)"))
+                        {
+                           SelectedFilesArray.Remove(file);
+                           file.IsSelect = false;
+                           i--;
+                        }
+                    }
+                    else
+                    {
+                        if (file.FilePath.Contains("(EN)"))
+                        {
+                            SelectedFilesArray.Remove(file);
+                            file.IsSelect= false;
+                            i--;
+                        }
+                    }
+                }
             }
         }
     }

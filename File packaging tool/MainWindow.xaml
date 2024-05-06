@@ -1,0 +1,264 @@
+﻿<Window x:Class="File_packaging_tool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:File_packaging_tool"
+        mc:Ignorable="d"
+        Title="Package Tool" Height="800" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="CorrectionWizard" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding CorrectionWizard}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="LWS" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding LWS}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}"  IsChecked="{Binding IsSelect ,Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="MCF" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding MCF}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="NPRF" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding NPRF}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="RayMarking" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding RayMarking}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="RayMaster" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding RayMaster}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="3"  Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="RM5D" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding RM5D}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="RMC2" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding RMC2}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="基本文件" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding EssencialFiles}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="额外文件" Style="{StaticResource TextBlockTitle}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TreeView ItemsSource="{Binding AdditionalFiles}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="{Binding FileName}" IsChecked="{Binding IsSelect, Mode=TwoWay}" Command="{Binding DataContext.ToggleCheckBoxCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="已选文件列表:" Height="30px" FontSize="20px"></TextBlock>
+                <DataGrid HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding SelectedFilesArray}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="文件名" Binding="{Binding FileName}"/>
+                        <DataGridTemplateColumn Header="操作">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="清空" Width="50px"  Height="30px" Style="{StaticResource ButtonDanger}" Command="{Binding DataContext.RemoveFileCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Style="{StaticResource TextBoxExtend}" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="请输入包名：" FontSize="20" Width="400" VerticalAlignment="Center" Text="{Binding PackageName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="250px" FontSize="20" Height="30" Background="LightGray" Style="{StaticResource TextBlockDefaultPrimary}" Text="{Binding PackagePath, Mode=TwoWay}"/>
+                        <Button Content="清空" Width="50px"  Height="30px" Style="{StaticResource ButtonDanger}" Command="{Binding  ClearPackagePathCommand}"/>
+                        <Button Content="打包路径" Width="100px" Height="30px" Style="{StaticResource ButtonSuccess}" Command="{Binding SelectPackagePathCommand}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <TextBlock Width="250px" FontSize="20" Height="30" Background="LightGray" Style="{StaticResource TextBlockDefaultPrimary}" Text="{Binding CopyPath, Mode=TwoWay}"/>
+                        <Button Content="清空" Width="50px"  Height="30px" Style="{StaticResource ButtonDanger}" Command="{Binding  ClearCopyPathCommand}" />
+                        <Button Content="复制路径" Width="100px" Height="30px" Style="{StaticResource ButtonSuccess}" Command="{Binding SelectCopyPathCommand}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="100px" Height="40px" Style="{StaticResource ButtonPrimary}" Content="打包并复制" Margin="10,0,0,0" Command="{Binding PackageCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

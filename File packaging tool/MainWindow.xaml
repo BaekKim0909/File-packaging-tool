@@ -6,11 +6,11 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:File_packaging_tool"
         mc:Ignorable="d"
-        Title="Package Tool" Height="800" Width="1200" ResizeMode="NoResize">
+        Title="Package Tool" Height="800" Width="1000" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -225,9 +225,12 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="已选文件列表:" Height="30px" FontSize="20px"></TextBlock>
+        <Grid Grid.Column="1" Margin="10 25 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Row="0" >
                 <DataGrid HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding SelectedFilesArray}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="文件名" Binding="{Binding FileName}"/>
@@ -240,24 +243,28 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Style="{StaticResource TextBoxExtend}" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="请输入包名：" FontSize="20" Width="400" VerticalAlignment="Center" Text="{Binding PackageName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="请输入包名：" Margin="5 0 3 5" Style="{DynamicResource LabelPrimary}" Height="40" FontSize="20"></Label>
+                    <TextBox Margin="0 0 0 5" Style="{StaticResource TextBoxExtend}" Height="40" FontSize="20" Width="230" VerticalAlignment="Center" Text="{Binding PackageName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Background="#FF42AB91"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" >
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Width="250px" FontSize="20" Height="30" Background="LightGray" Style="{StaticResource TextBlockDefaultPrimary}" Text="{Binding PackagePath, Mode=TwoWay}"/>
-                        <Button Content="清空" Width="50px"  Height="30px" Style="{StaticResource ButtonDanger}" Command="{Binding  ClearPackagePathCommand}"/>
-                        <Button Content="打包路径" Width="100px" Height="30px" Style="{StaticResource ButtonSuccess}" Command="{Binding SelectPackagePathCommand}"/>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5 20 0 0">
+                        <TextBlock Width="230px" FontSize="20" Height="30" Background="LightGray" Style="{StaticResource TextBlockDefaultPrimary}" Text="{Binding PackagePath, Mode=TwoWay}"/>
+                        <Button Content="清空" Width="50px"  Height="30px" Margin="10 0 10 0" Style="{StaticResource ButtonDanger}" Command="{Binding  ClearPackagePathCommand}"/>
+                        <Button Content="打包路径" Width="70px" Height="30px" Style="{StaticResource ButtonSuccess}" Command="{Binding SelectPackagePathCommand}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                        <TextBlock Width="250px" FontSize="20" Height="30" Background="LightGray" Style="{StaticResource TextBlockDefaultPrimary}" Text="{Binding CopyPath, Mode=TwoWay}"/>
-                        <Button Content="清空" Width="50px"  Height="30px" Style="{StaticResource ButtonDanger}" Command="{Binding  ClearCopyPathCommand}" />
-                        <Button Content="复制路径" Width="100px" Height="30px" Style="{StaticResource ButtonSuccess}" Command="{Binding SelectCopyPathCommand}"/>
+                    <StackPanel Orientation="Horizontal" Margin="5 20 0 0">
+                        <TextBlock Width="230px" FontSize="20" Height="30" Background="LightGray" Style="{StaticResource TextBlockDefaultPrimary}" Text="{Binding CopyPath, Mode=TwoWay}"/>
+                        <Button Content="清空" Width="50px"  Height="30px" Margin="10 0 10 0" Style="{StaticResource ButtonDanger}" Command="{Binding  ClearCopyPathCommand}" />
+                        <Button Content="复制路径" Width="70px" Height="30px" Style="{StaticResource ButtonSuccess}" Command="{Binding SelectCopyPathCommand}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="10 10 0 0">
                         <TextBlock Text="切换为EN:" FontSize="20" VerticalAlignment="Center"/>
-                        <ToggleButton Style="{StaticResource ToggleButtonSwitch}" IsChecked="{Binding IsEnglish, Mode=TwoWay}" Command="{Binding SwitchUserManualCommand}"/>
-                        <Button Width="100px" Height="40px" Style="{StaticResource ButtonPrimary}" Content="打包并复制" Margin="10,0,0,0" Command="{Binding PackageCommand}" />
+                        <ToggleButton Style="{StaticResource ToggleButtonSwitch}" Margin="5" IsChecked="{Binding IsEnglish, Mode=TwoWay}" Command="{Binding SwitchUserManualCommand}"/>
+                        <Button Width="100px" Height="40px" Style="{StaticResource ButtonPrimary}" Content="打包并复制" Margin="100,0,0,0" Command="{Binding PackageCommand}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

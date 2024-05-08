@@ -262,7 +262,7 @@ namespace File_packaging_tool.ViewModel
 
             foreach (var child in file.Children)
             {
-                child.IsSelect = !child.IsSelect; // 将子节点的 IsSelect 属性取反
+                child.IsSelect = file.IsSelect; // 将子节点的 IsSelect 属性取反
 
                 // 递归调用以处理子节点的子节点
                 ToggleChildrenIsSelect(child);
@@ -380,8 +380,7 @@ namespace File_packaging_tool.ViewModel
             SelectedFiles.Remove(file.FilePath);
             foreach (var child in file.Children)
             {
-                child.IsSelect = !child.IsSelect; // 将子节点的 IsSelect 属性取反
-
+                child.IsSelect = file.IsSelect; // 将子节点的 IsSelect 属性取反
                 // 递归调用以处理子节点的子节点
                 ToggleChildrenIsSelect(child);
             }

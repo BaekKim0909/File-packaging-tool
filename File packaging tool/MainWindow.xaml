@@ -110,7 +110,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="RayMarking" Style="{StaticResource TextBlockTitle}"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5 0 0 0" Text="RayMarking" Style="{StaticResource TextBlockTitle}"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <TreeView ItemsSource="{Binding RayMarking}">
@@ -130,7 +130,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="RayMaster" Style="{StaticResource TextBlockTitle}"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5 0 0 0" Text="RayMaster" Style="{StaticResource TextBlockTitle}"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <TreeView ItemsSource="{Binding RayMaster}">
@@ -190,7 +190,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="基本文件" Style="{StaticResource TextBlockTitle}"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5 0 0 0" Text="基本文件" Style="{StaticResource TextBlockTitle}"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <TreeView ItemsSource="{Binding EssencialFiles}">
@@ -210,7 +210,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock HorizontalAlignment="Left" Margin="5" Text="额外文件" Style="{StaticResource TextBlockTitle}"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5 0 0 0" Text="额外文件" Style="{StaticResource TextBlockTitle}"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <TreeView ItemsSource="{Binding AdditionalFiles}">

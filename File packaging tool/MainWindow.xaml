@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:File_packaging_tool"
         mc:Ignorable="d"
-        Title="Package Tool" Height="800" Width="1200">
+        Title="Package Tool" Height="800" Width="1200" ResizeMode="NoResize">s
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
